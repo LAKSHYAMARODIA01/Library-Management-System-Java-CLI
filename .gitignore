@@ -1,0 +1,20 @@
+# Ignore compiled files
+out/
+bin/
+*.class
+sources.txt
+
+# Exclude specifications / SRS as requested
+docs/
+*SRS*.md
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.iml
+
+# OS and temporary files
+.DS_Store
+Thumbs.db
+*.log
+data_test/

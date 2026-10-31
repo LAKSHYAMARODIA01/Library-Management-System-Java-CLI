@@ -1,0 +1,3 @@
+id,type,bookId,memberId,date,amount,note
+T0001,ISSUE,B001,M001,2026-10-26,0.0,Demo initial loan
+T0002,ISSUE,B003,M002,2026-10-26,0.0,Demo initial loan

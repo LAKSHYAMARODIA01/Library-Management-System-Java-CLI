@@ -1,0 +1,5 @@
+id,name,email,phone,finesCollected
+M001,Alice Johnson,alice@example.com,9876543210,0.0
+M002,Bob Smith,bob@example.com,9876543211,0.0
+M003,Charlie Brown,charlie@example.com,9876543212,0.0
+M004,Diana Prince,diana@example.com,9876543213,0.0
