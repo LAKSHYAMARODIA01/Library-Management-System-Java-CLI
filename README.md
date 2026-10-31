@@ -9,7 +9,6 @@
 - **Institution**: Birla Institute of Technology (BIT) Mesra, Lalpur Center, Ranchi
 - **Program**: Master of Computer Applications (MCA) — Semester 1
 - **Course / Subject**: Data Structures (DS) End Semester Project
-- **Developer / Student**: Lakshya Marodia ([@LAKSHYAMARODIA01](https://github.com/LAKSHYAMARODIA01))
 - **Objective**: To demonstrate practical, deep mastery of fundamental data structures by designing, engineering, and profiling a complete, production-grade Library Management System without relying on standard Java collection libraries (`ArrayList`, `HashMap`, `LinkedList`, etc.) or streams.
 
 ---
