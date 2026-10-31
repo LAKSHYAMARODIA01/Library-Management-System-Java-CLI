@@ -1,5 +1,16 @@
 # 📚 Library Management System (Java CLI)
-> **A High-Performance, Interactive Console Library System Built Entirely from Scratch Using Custom Generic Data Structures (Zero `java.util` Collections / Streams).**
+### 🎓 BIT Mesra, Lalpur — Master of Computer Applications (MCA) | Semester 1
+> **Data Structures (DS) End Semester Project**  
+> *A High-Performance, Interactive Console Library System Built Entirely from Scratch Using Custom Generic Data Structures (Zero `java.util` Collections / Streams).*
+
+---
+
+## 🏛 Academic Project Context
+- **Institution**: Birla Institute of Technology (BIT) Mesra, Lalpur Center, Ranchi
+- **Program**: Master of Computer Applications (MCA) — Semester 1
+- **Course / Subject**: Data Structures (DS) End Semester Project
+- **Developer / Student**: Lakshya Marodia ([@LAKSHYAMARODIA01](https://github.com/LAKSHYAMARODIA01))
+- **Objective**: To demonstrate practical, deep mastery of fundamental data structures by designing, engineering, and profiling a complete, production-grade Library Management System without relying on standard Java collection libraries (`ArrayList`, `HashMap`, `LinkedList`, etc.) or streams.
 
 ---
 
@@ -7,38 +18,45 @@
 1. [Project Overview](#-project-overview)
 2. [Why Build from Scratch?](#-why-build-from-scratch)
 3. [Tech Stack](#-tech-stack)
-4. [Architecture & System Flow](#-architecture--system-flow)
-5. [Directory & File Breakdown](#-directory--file-breakdown)
-6. [Data Structures Implementation Deep-Dive](#-data-structures-implementation-deep-dive)
-7. [Business Rules & Logic](#-business-rules--logic)
-8. [How to Run and Use](#-how-to-run-and-use)
-9. [Terminal UI Previews & Output Visuals](#-terminal-ui-previews--output-visuals)
-10. [Automated Testing & Verification](#-automated-testing--verification)
+4. [DSA to Real-World Feature Mapping](#-dsa-to-real-world-feature-mapping)
+5. [Architecture & System Flow](#-architecture--system-flow)
+6. [Directory & File Breakdown](#-directory--file-breakdown)
+7. [Data Structures Implementation Deep-Dive](#-data-structures-implementation-deep-dive)
+8. [Business Rules & Circulation Logic](#-business-rules--circulation-logic)
+9. [How to Run and Use](#-how-to-run-and-use)
+10. [Terminal UI Previews & Output Visuals](#-terminal-ui-previews--output-visuals)
+11. [Automated Testing & Verification](#-automated-testing--verification)
 
 ---
 
 ## 📖 Project Overview
 
-The **Library Management System (LMS)** is a professional, robust command-line application engineered in pure Java. Designed for librarians, this system manages the complete lifecycle of a modern library:
-- **Catalog Management**: Adding books, inventory tracking, keyword/ISBN search.
-- **Member Management**: Registration, profile lookup, contact management, active loan tracking.
-- **Circulation & Lending**: Book checkout/return with automatic due-date tracking and overdue fine calculation.
-- **Fair Reservation Waitlist**: FIFO-based waitlist for out-of-stock titles.
-- **Transactional Undo Engine**: Instant rollback for operations (`ADD_BOOK`, `ISSUE`, `RETURN`, `RESERVE`).
-- **DSA Profiler & Insights**: Live visualization of hash table buckets, load factor, collisions, and stack/queue internals.
-- **Data Persistence**: CSV file import/export for preserving state across sessions.
+The **Library Management System (LMS)** is an end-to-end, menu-driven CLI application engineered in pure Java for the MCA Semester 1 Data Structures curriculum at **BIT Mesra Lalpur**. 
+
+Designed for librarians, this system models the complete circulation lifecycle of a modern library:
+- **Catalog Management**: Adding books, stock tracking, case-insensitive keyword search, and $O(1)$ ISBN/ID lookups.
+- **Member Management**: Registration, profile lookup, contact management, and active loan tracking.
+- **Circulation & Lending**: Book checkout/return with automatic 14-day due dates and overdue fine calculation (Rs 2/day).
+- **Fair Reservation Waitlist**: FIFO-based waitlist for out-of-stock titles preventing starvation.
+- **Transactional Undo Engine**: Instant, stack-driven rollback for operations (`ADD_BOOK`, `ISSUE`, `RETURN`, `RESERVE`).
+- **DSA Profiler & Live Insights**: Real-time console visualization of hash table buckets, load factor, collisions, and stack/queue internals.
+- **Data Persistence**: Flat CSV file storage to seamlessly save and restore system state across sessions.
 
 ---
 
 ## 💡 Why Build from Scratch?
 
-In real-world software engineering, utilizing library collections (`ArrayList`, `HashMap`, `LinkedList`, etc.) abstracts away memory layout, amortized resizing, pointer manipulations, and collision management. 
+In standard enterprise development, developers routinely utilize library collections (`ArrayList`, `HashMap`, `LinkedList`, etc.). While convenient, this abstracts away critical low-level concepts:
+1. Memory allocation and pointer updates.
+2. Amortized doubling and table resizing.
+3. Hash distribution, bitwise indexing, and collision resolution.
+4. LIFO/FIFO scheduling fairness and rollback mechanics.
 
-This project intentionally **forbids standard collection libraries and streams in business logic**. Every core data structure is implemented by hand in generic Java:
-- **Doubly Linked List** with dual head/tail pointers.
-- **Array-Backed Stack** with geometric resizing.
-- **Singly Linked FIFO Queue** with rear enqueue and front re-insertion.
-- **Separate-Chaining Hash Table** with polynomial hash distribution and rehashing.
+For this **BIT Mesra DS End Sem Project**, standard collection libraries and streams were strictly **forbidden in business logic**. Every core structure is hand-coded as a reusable generic class in `com.library.ds`:
+- **Doubly Linked List** (`CustomLinkedList<T>`) with dual head & tail pointers.
+- **Array-Backed Stack** (`CustomStack<T>`) with dynamic geometric doubling.
+- **Singly Linked Queue** (`CustomQueue<T>`) with rear enqueue and front priority re-insertion.
+- **Separate-Chaining Hash Table** (`CustomHashMap<K, V>`) with polynomial hash distribution and dynamic re-hashing.
 
 ---
 
@@ -51,6 +69,18 @@ This project intentionally **forbids standard collection libraries and streams i
 | **Dependencies** | **0 External Dependencies** | No Maven, Gradle, Guava, Apache Commons, or JUnit |
 | **Persistence** | Flat CSV Files | Custom comma-delimited parser & serializer with string escaping |
 | **Interface** | Interactive Console (CLI) | Formatted ASCII tables, status indicators (`[OK]`, `[ERROR]`, `[INFO]`) |
+| **Curriculum Target** | MCA Sem 1 Data Structures | Birla Institute of Technology, Mesra (Lalpur Center) |
+
+---
+
+## 📊 DSA to Real-World Feature Mapping
+
+| Data Structure | Implementation Details | Where It Is Used | Why |
+| :--- | :--- | :--- | :--- |
+| **Hash Table** | Separate chaining over bucket chains of `CustomLinkedList<Entry<K,V>>`, polynomial string hashing ($h = h \times 31 + ch$), dynamic resizing on load factor $> 0.75$ | `booksById`, `booksByIsbn`, `membersById` | $O(1)$ average-time lookup for books and members by primary key and unique ISBN |
+| **Doubly Linked List** | Bidirectional node links with both `head` and `tail` pointers | Catalog insertion order, member active loans, collision bucket chains, transaction audit history | $O(1)$ insert and removal at both ends, stable sequential traversal, cheap deletion |
+| **Queue** | Singly-linked list with front and rear pointers, including `enqueueFront` | Book reservation waitlists per book | First-Come-First-Served (FIFO) fairness for book waitlists; front re-insertion on undo |
+| **Stack** | Resizable array-backed LIFO stack with geometric doubling | Undo history stack | Last-In-First-Out (LIFO) reversal of operations with atomic rollback |
 
 ---
 
@@ -192,7 +222,7 @@ LibraryManagementSystem/
 
 ---
 
-## ⚖ Business Rules & Logic
+## ⚖ Business Rules & Circulation Logic
 
 | ID | Rule Name | Description |
 | :--- | :--- | :--- |
@@ -220,7 +250,6 @@ javac -version
 ```
 
 ### 1. Compile the Source Code
-Generate the file compilation list and compile:
 
 **Windows (PowerShell):**
 ```powershell
@@ -253,7 +282,7 @@ java -cp out com.library.Main
 ### 3. Step-by-Step User Guide (Recommended First Run)
 1. **Load Sample Data**:
    - Type `8` (Admin) $\rightarrow$ `3` (Load Demo Data).
-   - This preloads 8 classic computer science books, 4 members, and 2 active loans.
+   - Preloads 8 computer science books, 4 members, and 2 active loans.
 2. **View Catalog**:
    - Type `1` (Book Management) $\rightarrow$ `8` (List All Books).
 3. **Issue a Book**:
@@ -336,8 +365,6 @@ B008   Computer Networking         James Kurose        978-0133594140  3       3
 
 ## 🧪 Automated Testing & Verification
 
-The project includes two autonomous test runners that test edge cases without external test harnesses:
-
 ### 1. Data Structures Unit Tests (`DsaSelfTest`)
 Verifies scenarios 1 to 6 (large inserts, resize triggers, collisions, FIFO order, middle removals, and stack reversal):
 ```bash
@@ -409,5 +436,14 @@ ALL SERVICE TESTS PASSED SUCCESSFULLY.
 
 ---
 
+## 👨‍💻 Author & Attribution
+- **Lakshya Marodia**
+- **Course**: MCA (Semester 1)
+- **Department**: Department of Computer Science & Applications
+- **College**: Birla Institute of Technology (BIT), Mesra, Lalpur Extension Center
+- **GitHub**: [@LAKSHYAMARODIA01](https://github.com/LAKSHYAMARODIA01)
+
+---
+
 ## 📄 License
-This project is open-source under the **MIT License**. Free to use, modify, and distribute for educational or commercial purposes.
+This project is submitted for educational and academic evaluation as part of the MCA curriculum at **BIT Mesra Lalpur**. Licensed under the **MIT License**.
